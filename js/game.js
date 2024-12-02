@@ -54,6 +54,15 @@ const playGame = () => {
       height: H,
     }),
   });
+
+  // Score
+  new Indicator({
+    fill: true,
+    num: 5,
+    width: 300,
+    selectedIndex: -1,
+    indicatorType: 'heart',
+  }).pos(0, 0, CENTER);
 };
 
 const ready = () => {
