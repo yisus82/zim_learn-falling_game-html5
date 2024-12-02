@@ -35,6 +35,25 @@ const playGame = () => {
         });
     }
   );
+
+  // Paddle
+  const paddle = new Rectangle({
+    width: 100,
+    height: 30,
+    color: white,
+  }).pos(0, 40, CENTER, BOTTOM);
+  new MotionController({
+    target: paddle,
+    type: 'keydown',
+    speed: 15,
+    axis: HORIZONTAL,
+    boundary: new Boundary({
+      x: 0,
+      y: 0,
+      width: W - paddle.width,
+      height: H,
+    }),
+  });
 };
 
 const ready = () => {
