@@ -4,7 +4,7 @@ const playGame = () => {
   // Adding noMouse() we are saying we will not interact with it and takes less processing
   // It would be fine without it, but it could help on older mobiles
   const pods = new Container().addTo().noMouse();
-  interval(
+  const podsInterval = interval(
     {
       min: 0.2,
       max: 0.5,
@@ -65,7 +65,7 @@ const playGame = () => {
   }).pos(0, 0, CENTER);
 
   // Timer
-  new Timer({
+  const timer = new Timer({
     time: 0,
     down: false,
     backgroundColor: purple,
@@ -75,7 +75,7 @@ const playGame = () => {
     .pos(50, 10, RIGHT);
 
   // Hit Test
-  Ticker.add(() => {
+  const ticker = Ticker.add(() => {
     pods.loop(
       pod => {
         if (pod.hitTestCircleRect(paddle)) {
@@ -84,7 +84,22 @@ const playGame = () => {
           } else {
             scoreIndicator.selectedIndex--;
           }
-          pod.removeFrom();
+          pod.dispose();
+
+          // Check win condition
+          if (scoreIndicator.selectedIndex === scoreIndicator.num - 1) {
+            Ticker.remove(ticker);
+            podsInterval.clear();
+            stopAnimate();
+            timer.stop();
+            new Pane({
+              content: 'Passion Pods Collected!!!\n\nTime: ' + timer.time,
+              color: white,
+              backgroundColor: red,
+            }).show(() => {
+              location.reload();
+            });
+          }
         }
       },
       // Loop backwards when removing objects so the index remains correct
