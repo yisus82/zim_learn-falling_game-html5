@@ -63,6 +63,16 @@ const playGame = () => {
     selectedIndex: -1,
     indicatorType: 'heart',
   }).pos(0, 0, CENTER);
+
+  // Timer
+  new Timer({
+    time: 0,
+    down: false,
+    backgroundColor: purple,
+    color: white,
+  })
+    .sca(0.7)
+    .pos(50, 10, RIGHT);
 };
 
 const ready = () => {
