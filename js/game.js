@@ -62,7 +62,7 @@ const playGame = () => {
     width: 300,
     selectedIndex: -1,
     indicatorType: 'heart',
-  }).pos(0, 0, CENTER);
+  }).pos(0, 10, CENTER);
 
   // Timer
   const timer = new Timer({
@@ -106,6 +106,27 @@ const playGame = () => {
       true
     );
   });
+
+  // Title
+  new Label({
+    text: 'Passion Pods',
+    size: 46,
+    bold: true,
+    variant: true,
+    color: pink,
+  })
+    .alp(0.7)
+    .reg(CENTER)
+    .pos(22, 12);
+  new Label({
+    text: 'Passion Pods',
+    size: 46,
+    bold: true,
+    variant: true,
+    color: red,
+  })
+    .reg(CENTER)
+    .pos(20, 10);
 };
 
 const ready = () => {
