@@ -10,7 +10,7 @@ const playGame = () => {
       max: 0.5,
     },
     () => {
-      new Circle({
+      const pod = new Circle({
         radius: 20,
         color: [yellow, red, blue, silver, grey, dark],
       })
@@ -32,7 +32,30 @@ const playGame = () => {
             // Dispose what just stopped animating
             target.dispose();
           },
+        })
+        .wiggle({
+          property: 'x',
+          // With null it starts at current value
+          baseAmount: null,
+          minAmount: 10,
+          maxAmount: 100,
+          minTime: 0.5,
+          maxTime: 1,
         });
+      new Circle({
+        radius: 100,
+        color: clear,
+        borderColor: pod.color,
+        borderWidth: 2,
+      }).center(pod);
+      new Circle({
+        radius: 200,
+        color: clear,
+        borderColor: pod.color,
+        borderWidth: 2,
+      })
+        .alp(0.5)
+        .center(pod);
     }
   );
 
