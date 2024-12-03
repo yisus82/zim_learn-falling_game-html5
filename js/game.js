@@ -56,7 +56,7 @@ const playGame = () => {
   });
 
   // Score
-  new Indicator({
+  const scoreIndicator = new Indicator({
     fill: true,
     num: 5,
     width: 300,
@@ -73,6 +73,24 @@ const playGame = () => {
   })
     .sca(0.7)
     .pos(50, 10, RIGHT);
+
+  // Hit Test
+  Ticker.add(() => {
+    pods.loop(
+      pod => {
+        if (pod.hitTestCircleRect(paddle)) {
+          if (pod.color == red) {
+            scoreIndicator.selectedIndex++;
+          } else {
+            scoreIndicator.selectedIndex--;
+          }
+          pod.removeFrom();
+        }
+      },
+      // Loop backwards when removing objects so the index remains correct
+      true
+    );
+  });
 };
 
 const ready = () => {
